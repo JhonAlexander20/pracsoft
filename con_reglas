@@ -1,0 +1,45 @@
+import random
+
+# Función para generar un rango aleatorio
+def generar_rango():
+    minimo = random.randint(1, 50)
+    maximo = random.randint(51, 100)
+    # Asegurarse de que maximo es mayor que minimo
+    if maximo <= minimo:
+        maximo = minimo + random.randint(1, 50)
+    return minimo, maximo
+
+# Función para generar un número secreto
+def generar_numero_secreto(minimo, maximo):
+    return random.randint(minimo, maximo)
+
+# Función para adivinar el número secreto
+def adivinar(numero_secreto, suposicion):
+    if suposicion > numero_secreto:
+        return "Demasiado alto"
+    elif suposicion < numero_secreto:
+        return "Demasiado bajo"
+    else:
+        return "Has ganado!"
+
+# Ejecución del juego
+def jugar_adivinanza():
+    print("\nBienvenido al juego de adivinanzas!")
+    minimo, maximo = generar_rango()
+    numero_secreto = generar_numero_secreto(minimo, maximo)
+    print(f"He generado un número secreto entre {minimo} y {maximo}. ¡Adivina cuál es!")
+
+    intentos = 0
+    while intentos < 10:
+        suposicion = int(input("Introduce tu suposición: "))
+        intentos += 1
+        resultado = adivinar(numero_secreto, suposicion)
+        print(resultado)
+        if resultado == "Has ganado!":
+            break
+    else:
+        print(f"Lo siento, has agotado tus 10 intentos. El número secreto era: {numero_secreto}")
+
+# Ejecutar el juego
+if __name__ == "__main__":
+    jugar_adivinanza()
